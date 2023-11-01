@@ -36,11 +36,30 @@ function formatDate(date) {
     day = day < 10 ? '0' + day : day;
     return `${year}${month}${day}`;
 }
+const matrix = [
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 10, 1, 1, 10, 1, 10, 10, 10, 1, 10, 1, 1, 1, 10, 1, 1, 1, 1, 10, 10, 1, 1, 1, 1, 10, 1, 1, 1, 10, 1, 1, 10, 10, 1, 1, 10, 10, 1, 1, 10, 1, 1, 1, 10, 10, 1, 1, 10, 1, 10, 1, 10],
+    [1, 10, 1, 1, 10, 1, 10, 1, 1, 1, 10, 1, 1, 1, 10, 1, 1, 1, 10, 1, 1, 10, 1, 1, 1, 10, 1, 1, 1, 10, 1, 10, 1, 1, 10, 1, 10, 1, 10, 1, 10, 1, 1, 1, 10, 1, 10, 1, 10, 1, 10, 1, 10],
+    [1, 10, 10, 10, 10, 1, 10, 10, 1, 1, 10, 1, 1, 1, 10, 1, 1, 1, 10, 1, 1, 10, 1, 1, 1, 10, 1, 1, 1, 10, 1, 10, 1, 1, 10, 1, 10, 10, 1, 1, 10, 1, 1, 1, 10, 1, 10, 1, 10, 1, 10, 1, 10],
+    [1, 10, 1, 1, 10, 1, 10, 1, 1, 1, 10, 1, 1, 1, 10, 1, 1, 1, 10, 1, 1, 10, 1, 1, 1, 10, 1, 10, 1, 10, 1, 10, 1, 1, 10, 1, 10, 1, 10, 1, 10, 1, 1, 1, 10, 1, 10, 1, 10, 1, 10, 1, 10],
+    [1, 10, 1, 1, 10, 1, 10, 1, 1, 1, 10, 1, 1, 1, 10, 1, 1, 1, 10, 1, 1, 10, 1, 1, 1, 10, 1, 10, 1, 10, 1, 10, 1, 1, 10, 1, 10, 1, 10, 1, 10, 1, 1, 1, 10, 1, 10, 1, 1, 1, 1, 1, 1],
+    [1, 10, 1, 1, 10, 1, 10, 10, 10, 1, 10, 10, 10, 1, 10, 10, 10, 1, 1, 10, 10, 1, 1, 1, 1, 1, 10, 10, 10, 1, 1, 1, 10, 10, 1, 1, 10, 1, 10, 1, 10, 10, 10, 1, 10, 10, 1, 1, 10, 1, 10, 1, 10]
+];
+function getWeeksSinceDate(year, month, day) {
+    const startDate = new Date(year, month - 1, day); // Note: month is 0-based in JavaScript
+    const currentDate = new Date();
+    const timeDiff = currentDate.getTime() - startDate.getTime();
+    const daysDiff = timeDiff / (1000 * 60 * 60 * 24); // Convert milliseconds to days
+    return Math.floor(daysDiff / 7);
+}
 app.post('/hit', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const now = new Date();
+    const rowInd = now.getDay();
+    const colInd = getWeeksSinceDate(2023, 10, 29) % 52;
     try {
-        for (let i = 1; i <= 10; i++) {
+        for (let i = 1; i <= matrix[rowInd][colInd]; i++) {
             const filePath = `data/${formatDate(new Date())}_${i}.txt`;
-            const buffer = Buffer.from("Hello World!", 'utf8');
+            const buffer = Buffer.from(`Hello World! ${rowInd} + ${colInd}`, 'utf8');
             const encodedContent = buffer.toString('base64');
             // Create or update file
             yield octokit.repos.createOrUpdateFileContents({
