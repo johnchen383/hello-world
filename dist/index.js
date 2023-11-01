@@ -58,7 +58,7 @@ app.post('/hit', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const colInd = getWeeksSinceDate(2023, 10, 29) % 52;
     try {
         for (let i = 1; i <= matrix[rowInd][colInd]; i++) {
-            const filePath = `data/${formatDate(new Date())}_${i}.txt`;
+            const filePath = `data/${formatDate(now)}_${now.getTime()}_${i}.txt`;
             const buffer = Buffer.from(`Hello World! ${rowInd} + ${colInd}`, 'utf8');
             const encodedContent = buffer.toString('base64');
             // Create or update file
