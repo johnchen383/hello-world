@@ -2,8 +2,7 @@ name: Run 10 times every 10 minutes starting at 8AM
 
 on:
   schedule:
-    - cron: '0,10,20,30,40,50 8 * * *'
-    - cron: '0,10,20,30,30,50 9 * * *'
+    - cron: '0 */2 * * *'
 
 jobs:
   send-post-request:
