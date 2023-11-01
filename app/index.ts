@@ -19,8 +19,20 @@ app.use(express.urlencoded({ limit: '75mb', extended: true }));
 
 app.get('/', (_req, res) => res.status(200).json({ "data": "Hello World! API is up :)" }));
 
+function formatDate(date: any) {
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1; // Add 1 because months are zero-indexed
+    let day = date.getDate();
+
+    // Ensuring two digits for month and day
+    month = month < 10 ? '0' + month : month;
+    day = day < 10 ? '0' + day : day;
+
+    return `${year}${month}${day}`;
+}
+
 app.post('/hit', async (_req, res) => {
-    const filePath = `data/${"test"}.txt`;
+    const filePath = `data/${formatDate(new Date())}.txt`;
 
     try {
         const buffer = Buffer.from("Hello World!", 'utf8');

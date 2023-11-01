@@ -27,8 +27,17 @@ app.use((0, cors_1.default)());
 app.use(express_1.default.json({ limit: '75mb' }));
 app.use(express_1.default.urlencoded({ limit: '75mb', extended: true }));
 app.get('/', (_req, res) => res.status(200).json({ "data": "Hello World! API is up :)" }));
+function formatDate(date) {
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1; // Add 1 because months are zero-indexed
+    let day = date.getDate();
+    // Ensuring two digits for month and day
+    month = month < 10 ? '0' + month : month;
+    day = day < 10 ? '0' + day : day;
+    return `${year}${month}${day}`;
+}
 app.post('/hit', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const filePath = `data/${"test"}.txt`;
+    const filePath = `data/${formatDate(new Date())}.txt`;
     try {
         const buffer = Buffer.from("Hello World!", 'utf8');
         const encodedContent = buffer.toString('base64');
