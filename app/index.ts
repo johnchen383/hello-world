@@ -33,7 +33,7 @@ function formatDate(date: any) {
 
 app.post('/hit', async (_req, res) => {
     try {
-        for (let i = 1; i <= 100; i++) {
+        for (let i = 1; i <= 10; i++) {
             const filePath = `data/${formatDate(new Date())}_${i}.txt`;
 
             const buffer = Buffer.from("Hello World!", 'utf8');

@@ -38,7 +38,7 @@ function formatDate(date) {
 }
 app.post('/hit', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        for (let i = 1; i <= 100; i++) {
+        for (let i = 1; i <= 10; i++) {
             const filePath = `data/${formatDate(new Date())}_${i}.txt`;
             const buffer = Buffer.from("Hello World!", 'utf8');
             const encodedContent = buffer.toString('base64');

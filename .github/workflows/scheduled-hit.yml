@@ -1,9 +1,9 @@
-name: Scheduled POST Request
+name: Run 10 times every 10 minutes starting at 8AM
 
 on:
   schedule:
-    # Runs at 08:00 UTC every day. You can adjust the cron schedule as needed.
-    - cron: '0 8 * * *'
+    - cron: '0,10,20,30,40,50 8 * * *'
+    - cron: '0,10 9 * * *'
 
 jobs:
   send-post-request:
