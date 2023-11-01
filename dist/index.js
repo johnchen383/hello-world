@@ -37,22 +37,24 @@ function formatDate(date) {
     return `${year}${month}${day}`;
 }
 app.post('/hit', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const filePath = `data/${formatDate(new Date())}.txt`;
     try {
-        const buffer = Buffer.from("Hello World!", 'utf8');
-        const encodedContent = buffer.toString('base64');
-        // Create file if it does not exist
-        const response = yield octokit.repos.createOrUpdateFileContents({
-            owner: process.env.GITHUB_USERNAME,
-            repo: process.env.GITHUB_REPOSITORY,
-            path: filePath,
-            message: `Create ${filePath}`,
-            content: encodedContent
-        });
-        res.json({ message: 'File created', data: response.data });
+        for (let i = 1; i <= 100; i++) {
+            const filePath = `data/${formatDate(new Date())}_${i}.txt`;
+            const buffer = Buffer.from("Hello World!", 'utf8');
+            const encodedContent = buffer.toString('base64');
+            // Create or update file
+            yield octokit.repos.createOrUpdateFileContents({
+                owner: process.env.GITHUB_USERNAME,
+                repo: process.env.GITHUB_REPOSITORY,
+                path: filePath,
+                message: `Create or update ${filePath}`,
+                content: encodedContent
+            });
+        }
+        res.json({ message: 'Files created or updated' });
     }
     catch (error) {
-        res.status(500).json({ message: 'Error creating file', error: error });
+        res.status(500).json({ message: 'Error in creating or updating files', error: error });
     }
 }));
 exports.default = app;
