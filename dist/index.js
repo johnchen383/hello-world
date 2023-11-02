@@ -52,8 +52,46 @@ function getWeeksSinceDate(year, month, day) {
     const daysDiff = timeDiff / (1000 * 60 * 60 * 24); // Convert milliseconds to days
     return Math.floor(daysDiff / 7);
 }
+const UTCFromMS = (ms) => {
+    return new Date(new Date(ms).toUTCString().replace(" GMT", ""));
+};
+const addHours = (dte, hrs) => {
+    return new Date(dte.getFullYear(), dte.getMonth(), dte.getDate(), dte.getHours() + hrs, dte.getMinutes(), dte.getMilliseconds());
+};
+const toNewZealand = (ms) => {
+    return addNewZealandDaylightSavings(UTCFromMS(ms));
+};
+const getPreviousSunday = (dte) => {
+    return new Date(dte.getFullYear(), dte.getMonth(), dte.getDate() - dte.getDay(), 1, 0, 0);
+};
+const getNextSunday = (dte) => {
+    return new Date(dte.getFullYear(), dte.getMonth(), dte.getDay() === 0 ? dte.getDate() : dte.getDate() + (7 - dte.getDay()), 1, 0, 0);
+};
+const standardHours = 12;
+const daylightHours = 13;
+const addNewZealandDaylightSavings = (dte) => {
+    const lastSundaySeptember = getPreviousSunday(new Date(dte.getFullYear(), 8, 30));
+    const firstSundayApril = getNextSunday(new Date(dte.getFullYear(), 3, 1));
+    // If its before firstSundayApril, add 13, if we went over 1am, add 12.
+    if (dte <= firstSundayApril) {
+        const daylightNz = addHours(dte, daylightHours);
+        if (daylightNz >= firstSundayApril) {
+            return addHours(dte, standardHours);
+        }
+        return daylightNz;
+    }
+    // if its before lastSundaySeptember, add 12 if we went over 1am add 13.
+    if (dte <= lastSundaySeptember) {
+        const standardNz = addHours(dte, standardHours);
+        if (standardNz >= lastSundaySeptember) {
+            return addHours(dte, daylightHours);
+        }
+        return standardNz;
+    }
+    return addHours(dte, daylightHours);
+};
 app.post('/hit', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const now = new Date();
+    const now = toNewZealand(new Date().getTime());
     const rowInd = now.getDay();
     const colInd = getWeeksSinceDate(2023, 10, 29) % 52;
     try {

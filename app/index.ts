@@ -32,13 +32,13 @@ function formatDate(date: any) {
 }
 
 const matrix: number[][] = [
-    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-    [1,10,1,1,10,1,10,10,10,1,10,1,1,1,10,1,1,1,1,10,10,1,1,1,1,10,1,1,1,10,1,1,10,10,1,1,10,10,1,1,10,1,1,1,10,10,1,1,10,1,10,1,10],
-    [1,10,1,1,10,1,10,1,1,1,10,1,1,1,10,1,1,1,10,1,1,10,1,1,1,10,1,1,1,10,1,10,1,1,10,1,10,1,10,1,10,1,1,1,10,1,10,1,10,1,10,1,10],
-    [1,10,10,10,10,1,10,10,1,1,10,1,1,1,10,1,1,1,10,1,1,10,1,1,1,10,1,1,1,10,1,10,1,1,10,1,10,10,1,1,10,1,1,1,10,1,10,1,10,1,10,1,10],
-    [1,10,1,1,10,1,10,1,1,1,10,1,1,1,10,1,1,1,10,1,1,10,1,1,1,10,1,10,1,10,1,10,1,1,10,1,10,1,10,1,10,1,1,1,10,1,10,1,10,1,10,1,10],
-    [1,10,1,1,10,1,10,1,1,1,10,1,1,1,10,1,1,1,10,1,1,10,1,1,1,10,1,10,1,10,1,10,1,1,10,1,10,1,10,1,10,1,1,1,10,1,10,1,1,1,1,1,1],
-    [1,10,1,1,10,1,10,10,10,1,10,10,10,1,10,10,10,1,1,10,10,1,1,1,1,1,10,10,10,1,1,1,10,10,1,1,10,1,10,1,10,10,10,1,10,10,1,1,10,1,10,1,10]
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 10, 1, 1, 10, 1, 10, 10, 10, 1, 10, 1, 1, 1, 10, 1, 1, 1, 1, 10, 10, 1, 1, 1, 1, 10, 1, 1, 1, 10, 1, 1, 10, 10, 1, 1, 10, 10, 1, 1, 10, 1, 1, 1, 10, 10, 1, 1, 10, 1, 10, 1, 10],
+    [1, 10, 1, 1, 10, 1, 10, 1, 1, 1, 10, 1, 1, 1, 10, 1, 1, 1, 10, 1, 1, 10, 1, 1, 1, 10, 1, 1, 1, 10, 1, 10, 1, 1, 10, 1, 10, 1, 10, 1, 10, 1, 1, 1, 10, 1, 10, 1, 10, 1, 10, 1, 10],
+    [1, 10, 10, 10, 10, 1, 10, 10, 1, 1, 10, 1, 1, 1, 10, 1, 1, 1, 10, 1, 1, 10, 1, 1, 1, 10, 1, 1, 1, 10, 1, 10, 1, 1, 10, 1, 10, 10, 1, 1, 10, 1, 1, 1, 10, 1, 10, 1, 10, 1, 10, 1, 10],
+    [1, 10, 1, 1, 10, 1, 10, 1, 1, 1, 10, 1, 1, 1, 10, 1, 1, 1, 10, 1, 1, 10, 1, 1, 1, 10, 1, 10, 1, 10, 1, 10, 1, 1, 10, 1, 10, 1, 10, 1, 10, 1, 1, 1, 10, 1, 10, 1, 10, 1, 10, 1, 10],
+    [1, 10, 1, 1, 10, 1, 10, 1, 1, 1, 10, 1, 1, 1, 10, 1, 1, 1, 10, 1, 1, 10, 1, 1, 1, 10, 1, 10, 1, 10, 1, 10, 1, 1, 10, 1, 10, 1, 10, 1, 10, 1, 1, 1, 10, 1, 10, 1, 1, 1, 1, 1, 1],
+    [1, 10, 1, 1, 10, 1, 10, 10, 10, 1, 10, 10, 10, 1, 10, 10, 10, 1, 1, 10, 10, 1, 1, 1, 1, 1, 10, 10, 10, 1, 1, 1, 10, 10, 1, 1, 10, 1, 10, 1, 10, 10, 10, 1, 10, 10, 1, 1, 10, 1, 10, 1, 10]
 ];
 
 function getWeeksSinceDate(year: number, month: number, day: number): number {
@@ -51,9 +51,81 @@ function getWeeksSinceDate(year: number, month: number, day: number): number {
     return Math.floor(daysDiff / 7);
 }
 
+const UTCFromMS = (ms:number) => {
+    return new Date(new Date(ms).toUTCString().replace(" GMT", ""))
+};
+
+const addHours = (dte:Date, hrs:number) => {
+    return new Date(
+        dte.getFullYear(),
+        dte.getMonth(),
+        dte.getDate(),
+        dte.getHours() + hrs,
+        dte.getMinutes(),
+        dte.getMilliseconds()
+    );
+};
+
+const toNewZealand = (ms:number) => {
+    return addNewZealandDaylightSavings(UTCFromMS(ms));
+};
+
+const getPreviousSunday = (dte:Date) => {
+    return new Date(
+        dte.getFullYear(),
+        dte.getMonth(),
+        dte.getDate() - dte.getDay(),
+        1,
+        0,
+        0
+    );
+};
+
+const getNextSunday = (dte:Date) => {
+    return new Date(
+        dte.getFullYear(),
+        dte.getMonth(),
+        dte.getDay() === 0 ? dte.getDate() : dte.getDate() + (7 - dte.getDay()),
+        1,
+        0,
+        0
+    )
+};
+
+const standardHours = 12;
+const daylightHours = 13;
+
+const addNewZealandDaylightSavings = (dte:Date) => {
+    const lastSundaySeptember = getPreviousSunday(
+        new Date(dte.getFullYear(), 8, 30)
+    );
+
+    const firstSundayApril = getNextSunday(
+        new Date(dte.getFullYear(), 3, 1)
+    );
+
+    // If its before firstSundayApril, add 13, if we went over 1am, add 12.
+    if (dte <= firstSundayApril) {
+        const daylightNz = addHours(dte, daylightHours);
+        if (daylightNz >= firstSundayApril) {
+            return addHours(dte, standardHours);
+        }
+        return daylightNz
+    }
+
+    // if its before lastSundaySeptember, add 12 if we went over 1am add 13.
+    if (dte <= lastSundaySeptember) {
+        const standardNz = addHours(dte, standardHours);
+        if (standardNz >= lastSundaySeptember) {
+            return addHours(dte, daylightHours);
+        }
+        return standardNz;
+    }
+    return addHours(dte, daylightHours);
+};
 
 app.post('/hit', async (_req, res) => {
-    const now = new Date();
+    const now = toNewZealand(new Date().getTime());
     const rowInd = now.getDay();
     const colInd = getWeeksSinceDate(2023, 10, 29) % 52;
 
@@ -74,7 +146,7 @@ app.post('/hit', async (_req, res) => {
             });
         }
 
-        res.json({ message: 'Files created or updated'});
+        res.json({ message: 'Files created or updated' });
 
     } catch (error) {
         res.status(500).json({ message: 'Error in creating or updating files', error: error });
