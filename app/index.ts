@@ -127,7 +127,7 @@ const addNewZealandDaylightSavings = (dte:Date) => {
 app.post('/hit', async (_req, res) => {
     const now = toNewZealand(new Date().getTime());
     const rowInd = now.getDay();
-    const colInd = getWeeksSinceDate(2023, 10, 29) % 52;
+    const colInd = getWeeksSinceDate(2023, 11, 5) % 52;
 
     try {
         for (let i = 1; i <= matrix[rowInd][colInd]; i++) {

@@ -93,7 +93,7 @@ const addNewZealandDaylightSavings = (dte) => {
 app.post('/hit', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const now = toNewZealand(new Date().getTime());
     const rowInd = now.getDay();
-    const colInd = getWeeksSinceDate(2023, 10, 29) % 52;
+    const colInd = getWeeksSinceDate(2023, 11, 5) % 52;
     try {
         for (let i = 1; i <= matrix[rowInd][colInd]; i++) {
             const filePath = `data/${formatDate(now)}_${now.getTime()}_${i}.txt`;
