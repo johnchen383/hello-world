@@ -46,8 +46,8 @@ const matrix = [
     [1, 10, 1, 1, 10, 1, 10, 10, 10, 1, 10, 10, 10, 1, 10, 10, 10, 1, 1, 10, 10, 1, 1, 1, 1, 1, 10, 10, 10, 1, 1, 1, 10, 10, 1, 1, 10, 1, 10, 1, 10, 10, 10, 1, 10, 10, 1, 1, 10, 1, 10, 1, 10]
 ];
 function getWeeksSinceDate(year, month, day) {
-    const startDate = new Date(year, month - 1, day); // Note: month is 0-based in JavaScript
-    const currentDate = new Date();
+    const startDate = toNewZealand(new Date(year, month - 1, day).getTime()); // Note: month is 0-based in JavaScript
+    const currentDate = toNewZealand(new Date().getTime());
     const timeDiff = currentDate.getTime() - startDate.getTime();
     const daysDiff = timeDiff / (1000 * 60 * 60 * 24); // Convert milliseconds to days
     return Math.floor(daysDiff / 7);
