@@ -26,7 +26,7 @@ const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(express_1.default.json({ limit: '75mb' }));
 app.use(express_1.default.urlencoded({ limit: '75mb', extended: true }));
-app.get('/', (_req, res) => res.status(200).json({ "data": "Hello World! API is up :)" }));
+app.get('/', (_req, res) => res.status(200).json({ "data": "Hello World! API is up up :))" }));
 function formatDate(date) {
     let year = date.getFullYear();
     let month = date.getMonth() + 1; // Add 1 because months are zero-indexed
