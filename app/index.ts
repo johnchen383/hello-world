@@ -139,7 +139,7 @@ app.post('/hit', async (_req, res) => {
             // Create or update file
             await octokit.repos.createOrUpdateFileContents({
                 owner: process.env.GITHUB_USERNAME,
-                repo: process.env.GITHUB_REPOSITORY,
+                repo: "hello-world-data",
                 path: filePath,
                 message: `Create or update ${filePath}`,
                 content: encodedContent
